@@ -554,7 +554,7 @@ const zoomIn = {
           viewport={{ once: true }}
         >
           <motion.img
-            src="\src\assets\images\burger img.png"
+            src="https://pixelfit.agency/wp/foodix/wp-content/uploads/2025/12/hero-two_img_two.png"
             alt="Burger"
             className="w-96 mx-auto mt-10 md:mt-0 select-none"
 
