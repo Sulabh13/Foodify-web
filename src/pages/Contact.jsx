@@ -1,128 +1,245 @@
-import { FiMapPin, FiMail, FiPhoneCall, FiClock } from "react-icons/fi";
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  FiMapPin,
+  FiMail,
+  FiPhoneCall,
+  FiChevronDown,
+} from "react-icons/fi";
 
-   const ContactUs = () => {
-       return (
-        <>
-    
-     {/* Contact Us Background Section */}
-       <section className="relative py-16 px-6 md:px-20 w-full h-96">
-        <div className="absolute inset-0 w-full">
-          <img
-            src="https://img.freepik.com/premium-photo/surprising-cooking-food-concept_779468-1466.jpg"
-            alt="About background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
-        <div className="relative max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl font-bold mb-6 text-white">Contact</h2>
-          <p className="text-lg font-bold text-white">Got questions or want to share your feedback? We’re here to help! Reach out to Swaad Nation anytime — whether you want to place an order, learn about our menu, or just say hello. Your satisfaction is our priority!</p>
+/* ============================= */
+/* SCROLL ANIMATION HOOK */
+/* ============================= */
+
+const useScrollAnimation = () => {
+  const ref = useRef();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, visible];
+};
+
+const ContactUs = () => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("Select Subject");
+
+  const subjects = [
+    "General Inquiry",
+    "Order Issue",
+    "Feedback",
+    "Complaint",
+  ];
+
+  /* Section Animation Refs */
+  const [heroRef, heroVisible] = useScrollAnimation();
+  const [leftRef, leftVisible] = useScrollAnimation();
+  const [rightRef, rightVisible] = useScrollAnimation();
+
+  return (
+    <>
+      {/* ================= HERO SECTION ================= */}
+      <section
+        ref={heroRef}
+        className={`relative w-full h-[300px] md:h-[450px] flex items-center justify-center transition-all duration-1000 ${
+          heroVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
+        <img
+          src="https://i.pinimg.com/736x/46/23/3f/46233f969bbfe40b5a8f5fe321e63f37.jpg"
+          alt="Pizza Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70"></div>
+
+        <div className="relative text-center text-white z-10 px-4">
+          <h1 className="text-3xl md:text-6xl font-extrabold tracking-wide">
+            CONTACT US
+          </h1>
+
+          <div className="mt-4 text-sm md:text-lg flex items-center justify-center gap-3">
+            <Link to="/" className="text-gray-300 hover:text-white transition">
+              Home
+            </Link>
+            <span>{">"}</span>
+            <span className="text-orange-400 font-semibold">
+              Contact Us
+            </span>
+          </div>
         </div>
       </section>
-   
-   {/* contact us  */}
-   <div className="container mx-auto px-4 py-12 bg-gray-200">
-      <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">Contact Us</h1>
 
-      {/* Info Boxes */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <div className="flex items-center gap-3 mb-3 text-red-500 text-2xl">
-            <FiMapPin />
-            <h2 className="text-xl font-semibold text-gray-700">Our Address</h2>
-          </div>
-          <p className="text-gray-600 text-sm">Ward No. 12, Main Market Road, Balaghat, Madhya Pradesh 481001, India</p>
-        </div>
+      {/* ================= CONTACT SECTION ================= */}
+      <div className="bg-gray-100 py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
 
-        <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <div className="flex items-center gap-3 mb-3 text-red-500 text-2xl">
-            <FiMail />
-            <h2 className="text-xl font-semibold text-gray-700">Email</h2>
-          </div>
-          <p className="text-gray-600 text-sm">Email us anytime for any inquiry.</p>
-          <p className="font-bold text-gray-700">info@example.com</p>
-        </div>
+            {/* ================= LEFT SIDE ================= */}
+            <div
+              ref={leftRef}
+              className={`transition-all duration-1000 delay-200 ${
+                leftVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
+              }`}
+            >
+              <p className="text-red-500 font-semibold mb-2">
+                CONTACT US
+              </p>
 
-        <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <div className="flex items-center gap-3 mb-3 text-red-500 text-2xl">
-            <FiPhoneCall />
-            <h2 className="text-xl font-semibold text-gray-700">Hotline</h2>
-          </div>
-          <p className="text-gray-600 text-sm">24/7 priority support available.</p>
-          <p className="font-bold text-gray-700">+208-666-01112</p>
-        </div>
+              <h2 className="text-2xl md:text-4xl font-extrabold mb-8">
+                READY TO CONTACT US
+              </h2>
 
-        <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-          <div className="flex items-center gap-3 mb-3 text-red-500 text-2xl">
-            <FiClock />
-            <h2 className="text-xl font-semibold text-gray-700">Opening Hours</h2>
+              <div className="space-y-8">
+
+                {/* Location */}
+                <div className="flex items-start bg-[#e9e4dc] p-6 hover:scale-105 transition duration-300">
+                  <div className="bg-white p-5 text-red-500 text-2xl">
+                    <FiMapPin />
+                  </div>
+                  <div className="ml-6">
+                    <h4 className="text-gray-600 font-medium">
+                      Locations
+                    </h4>
+                    <p className="font-bold">
+                      38 SARDINELLA, 2ND EDEN WALK,<br />
+                      ORCHARD VIEW, LONDON, UK
+                    </p>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start bg-[#e9e4dc] p-6 hover:scale-105 transition duration-300">
+                  <div className="bg-white p-5 text-red-500 text-2xl">
+                    <FiMail />
+                  </div>
+                  <div className="ml-6">
+                    <h4 className="text-gray-600 font-medium">
+                      Email Address
+                    </h4>
+                    <p className="font-bold">
+                      SUPPORTINFO@GMAIL.COM
+                    </p>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start bg-[#e9e4dc] p-6 hover:scale-105 transition duration-300">
+                  <div className="bg-white p-5 text-red-500 text-2xl">
+                    <FiPhoneCall />
+                  </div>
+                  <div className="ml-6">
+                    <h4 className="text-gray-600 font-medium">
+                      Phone No
+                    </h4>
+                    <p className="font-bold">
+                      +880 (123) 456 88
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* ================= RIGHT SIDE ================= */}
+            <div
+              ref={rightRef}
+              className={`bg-[#e9e4dc] p-6 md:p-10 transition-all duration-1000 delay-300 ${
+                rightVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-10"
+              }`}
+            >
+              <h3 className="text-xl md:text-3xl font-bold mb-3">
+                SEND US MESSAGE
+              </h3>
+
+              <form className="space-y-5">
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="p-4 bg-white w-full outline-none"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    className="p-4 bg-white w-full outline-none"
+                  />
+                </div>
+
+                {/* DROPDOWN */}
+                <div className="relative">
+                  <div
+                    onClick={() => setOpen(!open)}
+                    className="p-4 bg-white w-full cursor-pointer flex justify-between items-center"
+                  >
+                    {selected}
+                    <FiChevronDown
+                      className={`transition-transform duration-300 ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+
+                  <div
+                    className={`absolute left-0 right-0 bg-white shadow-lg overflow-hidden transition-all duration-300 ${
+                      open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    {subjects.map((item, index) => (
+                      <div
+                        key={index}
+                        onClick={() => {
+                          setSelected(item);
+                          setOpen(false);
+                        }}
+                        className="p-3 hover:bg-red-100 cursor-pointer"
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <textarea
+                  rows="5"
+                  placeholder="Write Message"
+                  className="p-4 bg-white w-full outline-none"
+                ></textarea>
+
+                <button
+                  type="submit"
+                  className="bg-red-600 text-white px-8 py-3 font-semibold hover:bg-red-700 transition hover:scale-105"
+                >
+                  SEND MESSAGE →
+                </button>
+
+              </form>
+            </div>
+
           </div>
-          <p className="text-gray-600 text-sm">Sunday - Friday: 9 AM - 6 PM</p>
-          <p className="text-gray-600 text-sm">Saturday: 9 AM - 4 PM</p>
         </div>
       </div>
+    </>
+  );
+};
 
-      {/* Contact Form Section */}
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-1/2">
-          <img
-            src="https://gramentheme.com/html/fresheat/assets/img/contact/contactThumb2_1.png"
-            alt="Delicious Food"
-            className="rounded-xl shadow-lg"
-          />
-        </div>
-
-        <div className="md:w-1/2 bg-white p-6 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-700">Get In Touch</h2>
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Full Name</label>
-              <input type="text" className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Email Address</label>
-              <input type="email" className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Phone Number</label>
-              <input type="tel" className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Subject</label>
-              <input type="text" className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Message</label>
-              <textarea rows="4" className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-400" required />
-            </div>
-            <div className="flex items-start gap-2">
-              <input type="checkbox" className="mt-1" />
-              <span className="text-sm text-gray-600">Collaboratively formulate principle capital. Progressively evolve user.</span>
-            </div>
-            <button type="submit" className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition">
-              Submit Now
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Map Section */}
-      <div className="mt-12">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Location</h2>
-        <iframe
-          title="Google Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3704.0635656981904!2d80.18208747473578!3d21.816474760259364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2a59631d11fcf7%3A0xf335aa2abbd7cf7c!2sKali%20Putli%20Chowk%2C%20Balaghat%2C%20Madhya%20Pradesh%20481001!5e0!3m2!1sen!2sin!4v1748184616255!5m2!1sen!2sin"
-          className="w-full h-64 border-0 rounded-xl shadow"
-          allowFullScreen=""
-          loading="lazy"
-        />
-
-        
-      </div>
-    </div>
-           </>
-       );
-   }
-
-   export default ContactUs;
-   
+export default ContactUs;

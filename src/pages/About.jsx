@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import {
   FaUserTie,
   FaNewspaper,
@@ -118,10 +119,10 @@ function About() {
 
   useEffect(() => {
     const i = setInterval(() => {
-      setYears((p) => (p < 7 ? p + 1 : p));
-      setDishes((p) => (p < 30 ? p + 1 : p));
-      setReviews((p) => (p < 500 ? p + 10 : p));
-      setCustomers((p) => (p < 10 ? p + 1 : p));
+      setYears((p) => (p < 12 ? p + 1 : p));
+      setDishes((p) => (p < 150 ? p + 1 : p));
+      setReviews((p) => (p < 2500 ? p + 10 : p));
+      setCustomers((p) => (p < 12 ? p + 1 : p));
     }, 60);
 
     return () => clearInterval(i);
@@ -132,73 +133,162 @@ function About() {
       <section className="bg-gray-200">
 
         {/* ===== About Hero Section ===== */}
-        <section className="bg-[#f9f9ff] py-20 px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-4">About Us</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto mb-6">
-Our achievement story stands as a powerful testament to teamwork and perseverance.
-It reflects the dedication, hard work, and commitment of every individual involved.
-Each challenge we faced made us stronger and more determined to succeed.
-Together, we supported each other and never gave up on our goals.
-This journey inspires us to keep growing and achieving even greater milestones.            </p>
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg">
-              Read More →
-            </button>
-          </div>
+    <section className="bg-[#f9f9ff] py-20 px-4">
+  <div className="max-w-6xl mx-auto text-center">
+    
+    {/* HEADING */}
+    <motion.h2
+      initial={{ opacity: 0, y: -40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="text-4xl font-bold mb-4"
+    >
+      About Us
+    </motion.h2>
 
-          <div className="relative max-w-6xl mx-auto mt-16 rounded-2xl overflow-hidden shadow-xl">
-            <img
-              src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f"
-              alt="Chefs cooking"
-              className="w-full h-[480px] object-cover"
-            />
+    {/* PARAGRAPH */}
+    <motion.p
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      viewport={{ once: true }}
+      className="text-gray-600 max-w-3xl mx-auto mb-6"
+    >
+      Our achievement story stands as a powerful testament to teamwork and perseverance.
+      It reflects the dedication, hard work, and commitment of every individual involved.
+      Each challenge we faced made us stronger and more determined to succeed.
+      Together, we supported each other and never gave up on our goals.
+      This journey inspires us to keep growing and achieving even greater milestones.
+    </motion.p>
 
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur rounded-xl px-6 py-5 shadow-lg w-[90%] md:w-[80%]">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                  <h3 className="text-2xl font-bold text-indigo-600">{years}+</h3>
-                  <p className="text-sm text-gray-500">Years of Experience</p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-indigo-600">{dishes}+</h3>
-                  <p className="text-sm text-gray-500">Dishes in Our Menu</p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-indigo-600">{reviews}+</h3>
-                  <p className="text-sm text-gray-500">Customer Reviews</p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-indigo-600">{customers}k+</h3>
-                  <p className="text-sm text-gray-500">Happy Customers</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+    {/* BUTTON */}
+    <motion.button
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ delay: 0.4, duration: 0.4 }}
+      viewport={{ once: true }}
+      className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md"
+    >
+      Read More →
+    </motion.button>
+  </div>
+
+  {/* IMAGE SECTION */}
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5, duration: 0.8 }}
+    viewport={{ once: true }}
+    className="relative max-w-6xl mx-auto mt-16 rounded-2xl overflow-hidden shadow-xl"
+  >
+    <motion.img
+      src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f"
+      alt="Chefs cooking"
+      className="w-full h-[480px] object-cover"
+      initial={{ scale: 1.1 }}
+      whileInView={{ scale: 1 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+    />
+
+    {/* STATS BOX */}
+    <motion.div
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.7, duration: 0.8 }}
+      viewport={{ once: true }}
+      className="absolute bottom-6 left-[100px] -translate-x-1/2 bg-white/90 backdrop-blur rounded-xl px-6 py-5 shadow-lg w-[90%] md:w-[80%]"
+    >
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+        {[ 
+          { value: `${years}+`, label: "Years of Experience" },
+          { value: `${dishes}+`, label: "Dishes in Our Menu" },
+          { value: `${reviews}+`, label: "Customer Reviews" },
+          { value: `${customers}k+`, label: "Happy Customers" }
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 + i * 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-indigo-600">
+              {item.value}
+            </h3>
+            <p className="text-sm text-gray-500">
+              {item.label}
+            </p>
+          </motion.div>
+        ))}
+
+      </div>
+    </motion.div>
+  </motion.div>
+</section>
 
         {/* ===== Order Section (Pizza wala) ===== */}
-        <section className="w-full flex justify-center bg-[#f9f9ff] py-10 px-4">
-          <div className="w-full max-w-6xl rounded-[32px] border border-purple-200 bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 p-8 grid md:grid-cols-2 items-center gap-8">
-            <div>
-              <h1 className="text-3xl font-bold mb-4">
-                Order Now & Satisfy Your Cravings
-              </h1>
-              <p className="text-gray-600 mb-6">
-                Let us bring the flavors you love straight to your door.
-              </p>
-              <button className="bg-purple-600 text-white px-6 py-3 rounded-xl">
-                Read More →
-              </button>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src="https://themewagon.github.io/restaurant/assets/img/pizza.png"
-                alt="Pizza"
-                className="w-64 md:w-[420px]"
-              />
-            </div>
-          </div>
-        </section>
+      <section className="w-full flex justify-center bg-[#f9f9ff] py-10 px-4">
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="w-full max-w-6xl rounded-[32px] border border-purple-200 
+               bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 
+               p-8 grid md:grid-cols-2 items-center gap-8"
+  >
+    
+    {/* LEFT CONTENT */}
+    <motion.div
+      initial={{ opacity: 0, x: -60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.2, duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+        Order Now & Satisfy Your Cravings
+      </h1>
+
+      <p className="text-gray-600 mb-6 text-sm sm:text-base">
+        Let us bring the flavors you love straight to your door.
+      </p>
+
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300 }}
+        className="bg-purple-600 text-white px-6 py-3 rounded-xl shadow-md"
+      >
+        Read More →
+      </motion.button>
+    </motion.div>
+
+    {/* RIGHT IMAGE */}
+    <motion.div
+      initial={{ opacity: 0, x: 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.3, duration: 0.8 }}
+      viewport={{ once: true }}
+      className="flex justify-center md:justify-end"
+    >
+      <motion.img
+        src="https://themewagon.github.io/restaurant/assets/img/pizza.png"
+        alt="Pizza"
+        className="w-56 sm:w-64 md:w-[420px]"
+        initial={{ scale: 0.8, rotate: -10 }}
+        whileInView={{ scale: 1, rotate: 0 }}
+        transition={{ duration: 0.8 }}
+        whileHover={{ scale: 1.05 }}
+      />
+    </motion.div>
+
+  </motion.div>
+</section>
 
         {/* ===== Chef Section ===== */}
         <section className="py-20 bg-gray-50">
@@ -289,36 +379,89 @@ This journey inspires us to keep growing and achieving even greater milestones. 
 
   </div>
 </section>
+
+
+{/* ==================== */}
+
+
+{/* ============ */}
+
         {/* ===== News Section ===== */}
-        <section className="py-16 px-6 md:px-20 bg-[#f9f9ff]">
-          <div className="flex justify-center gap-2 text-2xl font-semibold text-red-600 mb-6">
-            <FaNewspaper />
-            <h3>Our Latest Food News</h3>
+    
+
+<section className="py-16 px-6 md:px-20 bg-[#f9f9ff]">
+  
+  {/* HEADING */}
+  <motion.div
+    initial={{ opacity: 0, y: -40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="flex justify-center gap-2 text-xl sm:text-2xl font-semibold text-red-600 mb-10"
+  >
+  
+    <h2 className="text-5xl font-extrabold tracking-wide text-black mb-4">
+      Our Latest {" "}
+      <span className="text-red-500">
+   Food News
+      </span>
+    </h2>
+  </motion.div>
+
+  {/* NEWS GRID */}
+  <div className="grid gap-8 md:grid-cols-2">
+    {news.map((item, idx) => (
+      <motion.div
+        key={idx}
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: idx * 0.2 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -10 }}
+        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
+      >
+        {/* IMAGE */}
+        <div className="overflow-hidden">
+          <motion.img
+            src={item.thumb}
+            alt={item.title}
+            className="w-full h-48 object-cover"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.4 }}
+          />
+        </div>
+
+        <div className="p-6">
+          <h4 className="text-lg sm:text-xl font-bold mb-2">
+            {item.title}
+          </h4>
+
+          <p className="text-gray-600 text-sm sm:text-base mb-4">
+            {item.description}
+          </p>
+
+          <div className="flex text-xs sm:text-sm text-gray-500 gap-4 mb-3 flex-wrap">
+            <span className="flex items-center gap-1">
+              <FaUser /> {item.author}
+            </span>
+            <span className="flex items-center gap-1">
+              <FaUtensils /> {item.category}
+            </span>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            {news.map((item, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img
-                  src={item.thumb}
-                  alt={item.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                  <p className="text-gray-600 mb-4">{item.description}</p>
-                  <div className="flex text-sm text-gray-500 gap-4 mb-3">
-                    <span><FaUser /> {item.author}</span>
-                    <span><FaUtensils /> {item.category}</span>
-                  </div>
-                  <Link to={item.link} className="text-red-600 font-semibold">
-                    Read More →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+          <motion.div whileHover={{ x: 5 }}>
+            <Link
+              to={item.link}
+              className="text-red-600 font-semibold text-sm sm:text-base"
+            >
+              Read More →
+            </Link>
+          </motion.div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       </section>
     </>

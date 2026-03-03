@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { FaStar, FaQuoteLeft, FaUserTie } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
@@ -432,93 +433,167 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
 
   const item = testimonials[index];
 
+  // ================= ANIMATION VARIANTS =================
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 80 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 80 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
+  },
+};
+
+const zoomIn = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7 },
+  },
+};
+
   return (
     <>
       <section className="bg-gray-200">
         <div className=" text-black">
           {/* Hero Section */}
-          <section
-  className="relative bg-[#faeccc] text-white px-6 py-20 md:px-20 overflow-hidden"
-  onMouseMove={handleMouseMove}
-  onMouseLeave={handleMouseLeave}
->
-  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-    
-    <div className="w-full md:w-1/2">
-      <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-  <span className="inline-block min-h-[72px] md:min-h-[96px] text-red-500">
-    <Typewriter
-      words={[
-        "Chicago Deep",
-        "Burger King",
-        "Delicious & Juicy",
-        "100% Fresh",
-      ]}
-      loop
-      cursor
-      cursorStyle=""
-      typeSpeed={120}
-      deleteSpeed={80}
-      delaySpeed={500}
-    />
-  </span>
-</h1>
-
-
-      <p className="mt-4 text-lg text-black">
-        Welcome india - 50% OFF
-      </p>
-
-  <button
-  type="button"
-  className="mt-6 font-sans flex justify-center gap-2 items-center shadow-xl text-lg text-gray-50 bg-[#0A0D2D] backdrop-blur-md lg:font-semibold isolation-auto 
-  before:absolute before:w-full before:transition-all before:duration-700 
-  before:hover:w-full before:-left-full before:hover:left-0 
-  before:rounded-full before:bg-red-500 
-  hover:text-gray-50 before:-z-10 before:aspect-square 
-  before:hover:scale-150 before:hover:duration-700 
-  relative z-10 px-6 py-3 overflow-hidden border-2 rounded-full group"
->
-  Order Now
-
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 19"
-    className="w-8 h-8 justify-end bg-gray-50 group-hover:rotate-90 
-    group-hover:bg-gray-50 ease-linear duration-300 
-    rounded-full border border-gray-700 
-    group-hover:border-none p-2 rotate-45"
-  >
-    <path
-      className="fill-gray-800"
-      d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-    />
-  </svg>
-</button>
-
-    </div>
-
-    <div
-      className="w-full md:w-1/2 transition-transform duration-200 ease-out"
-      style={{
-        transform: `translate(${hoverPos.x}px, ${hoverPos.y}px)`,
-      }}
+ <section
+      className="relative bg-[#faeccc] text-white px-6 py-20 md:px-20 overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      <img
-        src="https://gramentheme.com/html/fresheat/assets/img/banner/bannerThumb1_2.png"
-        alt="Burger"
-        className="w-96 mx-auto mt-10 md:mt-0 select-none pointer-events-none"
-      />
-    </div>
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
 
-  </div>
-</section>
+        {/* LEFT CONTENT */}
+        <motion.div
+          className="w-full md:w-1/2"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <span className="inline-block min-h-[72px] md:min-h-[96px] text-red-500">
+              <Typewriter
+                words={[
+                  "Chicago Deep",
+                  "Burger King",
+                  "Delicious & Juicy",
+                  "100% Fresh",
+                ]}
+                loop
+                cursor
+                cursorStyle="|"
+                typeSpeed={120}
+                deleteSpeed={80}
+                delaySpeed={500}
+              />
+            </span>
+          </h1>
 
+          <p className="mt-4 text-lg text-black">
+            Welcome india - 50% OFF
+          </p>
+
+          <button
+            type="button"
+            className="mt-6 font-sans flex justify-center gap-2 items-center shadow-xl text-lg text-gray-50 bg-[#0A0D2D] backdrop-blur-md lg:font-semibold isolation-auto 
+            before:absolute before:w-full before:transition-all before:duration-700 
+            before:hover:w-full before:-left-full before:hover:left-0 
+            before:rounded-full before:bg-red-500 
+            hover:text-gray-50 before:-z-10 before:aspect-square 
+            before:hover:scale-150 before:hover:duration-700 
+            relative z-10 px-6 py-3 overflow-hidden border-2 rounded-full group"
+          >
+            Order Now
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 19"
+              className="w-8 h-8 justify-end bg-gray-50 group-hover:rotate-90 
+              group-hover:bg-gray-50 ease-linear duration-300 
+              rounded-full border border-gray-700 
+              group-hover:border-none p-2 rotate-45"
+            >
+              <path
+                className="fill-gray-800"
+                d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+              />
+            </svg>
+          </button>
+        </motion.div>
+
+        {/* RIGHT IMAGE */}
+        <motion.div
+          className="w-full md:w-1/2 transition-transform duration-200 ease-out"
+          style={{
+            transform: `translate(${hoverPos.x}px, ${hoverPos.y}px)`,
+          }}
+          initial={{ opacity: 0, x: 80, scale: 0.8 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <motion.img
+            src="src/assets/images/burger img.png"
+            alt="Burger"
+            className="w-96 mx-auto mt-10 md:mt-0 select-none"
+
+            /* Floating */
+            animate={{ y: [0, -15, 0] }}
+            transition={{
+              repeat: Infinity,
+              duration: 3,
+              ease: "easeInOut",
+            }}
+
+            /* Hover 3D Tilt */
+            whileHover={{
+              scale: 1.1,
+              rotateY: 15,
+              rotateX: -10,
+            }}
+
+            style={{
+              transformStyle: "preserve-3d",
+              perspective: 1000,
+            }}
+          />
+        </motion.div>
+
+      </div>
+    </section>
 
           {/* Popular Food Items */}
-         <section className="py-14 md:py-20 px-4 md:px-20 bg-gray-50">
+<section className="py-14 md:py-20 px-4 md:px-20 bg-gray-50">
+
   {/* Heading */}
-  <div className="text-center mb-10">
+  <motion.div
+    className="text-center mb-10"
+    initial={{ opacity: 0, y: -50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+  >
     <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide text-gray-900">
       Popular{" "}
       <span className="text-red-500">Food Items</span>
@@ -526,7 +601,7 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
     <p className="mt-3 text-gray-600 max-w-xl mx-auto">
       Discover our most loved dishes, freshly prepared and full of flavor.
     </p>
-  </div>
+  </motion.div>
 
   {/* Slider */}
   <Swiper
@@ -544,61 +619,100 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
   >
     {foodItems.map((item, i) => (
       <SwiperSlide key={i}>
-        <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 h-full flex flex-col items-center">
-          <img
+        <motion.div
+          className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 h-full flex flex-col items-center"
+          
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: i * 0.2 }}
+          viewport={{ once: true }}
+
+          whileHover={{
+            y: -10,
+            rotate: 2,
+            scale: 1.05,
+          }}
+        >
+          <motion.img
             src={item.img}
             alt={item.name}
             className="w-24 h-24 object-contain"
+
+            whileHover={{ rotate: 10, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 200 }}
           />
+
           <h4 className="mt-4 text-lg font-semibold text-gray-800">
             {item.name}
           </h4>
+
           <p className="mt-1 text-red-500 font-medium">
             {item.price}
           </p>
-        </div>
+        </motion.div>
       </SwiperSlide>
     ))}
   </Swiper>
+
 </section>
 
 
           {/* Category Buttons */}
           {/* START  */}
 
-         <section className="py-16 md:py-24 px-4 md:px-20 bg-gray-50 text-gray-900">
+<section className="py-16 md:py-24 px-4 md:px-20 bg-gray-50 text-gray-900">
   <div className="max-w-7xl mx-auto text-center">
 
     {/* Heading */}
-    <div className="mb-14">
-     
+    <motion.div
+      className="mb-14"
+      initial={{ opacity: 0, y: -50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
 
-       <h2 className="text-5xl font-extrabold tracking-wide text-black mb-4">
-                    Course {" "}
-                <span className="text-5xl font-extrabold tracking-wide text-red-500 mb-4">
-                  Overview 
-                </span>
-              </h2>
+      <h2 className="text-5xl font-extrabold tracking-wide text-black mb-4">
+        Course{" "}
+        <span className="text-5xl font-extrabold tracking-wide text-red-500 mb-4">
+          Overview
+        </span>
+      </h2>
 
-     <span className="inline-block text-xs font-semibold tracking-widest text-yellow-500 uppercase mb-3">
+      <motion.span
+        className="inline-block text-xs font-semibold tracking-widest text-yellow-500 uppercase mb-3"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        viewport={{ once: true }}
+      >
         Learn To Create Nutritious Meals & Master 5 Healthy Recipes In 4 Weeks
-      </span>
+      </motion.span>
 
       <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
         Gain practical cooking skills, understand nutrition basics, and prepare
         delicious healthy meals with confidence in just four weeks.
       </p>
-    </div>
+    </motion.div>
 
     {/* Cards */}
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-14">
 
-      {/* Card */}
-      <div className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer">
-        <img
+      {/* Card 1 */}
+      <motion.div
+        className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.img
           src="https://i.pinimg.com/736x/08/c7/0d/08c70d473888e35bd1c4cd9d1d2983d7.jpg"
           alt="Balance in Meals"
           className="w-full h-56 object-cover"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.4 }}
         />
         <div className="p-6 text-left">
           <h3 className="font-semibold text-lg mb-2">
@@ -608,14 +722,23 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
             Learn how to balance nutrients for energy, health, and taste.
           </p>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Card */}
-      <div className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer">
-        <img
+      {/* Card 2 */}
+      <motion.div
+        className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.img
           src="https://i.pinimg.com/1200x/da/54/b8/da54b8bfaffa1ad68f9f23d57d1222c8.jpg"
           alt="Improve Cooking Skills"
           className="w-full h-56 object-cover"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.4 }}
         />
         <div className="p-6 text-left">
           <h3 className="font-semibold text-lg mb-2">
@@ -625,14 +748,23 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
             Build confidence with modern techniques and kitchen tips.
           </p>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Card */}
-      <div className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer">
-        <img
+      {/* Card 3 */}
+      <motion.div
+        className="bg-white shadow-md rounded-2xl overflow-hidden transition duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <motion.img
           src="https://i.pinimg.com/736x/72/2a/0c/722a0c35c56cdfb242610b193d1c4d7b.jpg"
           alt="Kitchen Equipment"
           className="w-full h-56 object-cover"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.4 }}
         />
         <div className="p-6 text-left">
           <h3 className="font-semibold text-lg mb-2">
@@ -642,13 +774,21 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
             Understand tools that make cooking faster and easier.
           </p>
         </div>
-      </div>
+      </motion.div>
+
     </div>
 
     {/* Button */}
-    <button className="bg-black hover:bg-red-600 text-white font-semibold px-12 py-4 rounded-full transition transform hover:scale-105">
+    <motion.button
+      className="bg-black hover:bg-red-600 text-white font-semibold px-12 py-4 rounded-full transition transform hover:scale-105"
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.1 }}
+    >
       Start Your Journey Now
-    </button>
+    </motion.button>
 
   </div>
 </section>
@@ -657,203 +797,347 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
           {/* END */}
 
           {/* American Cuisine Variety */}
-          <section className="py-16 px-6 md:px-20 bg-gray-50">
-            <div className="grid md:grid-cols-3 items-center gap-10 max-w-6xl mx-auto">
-              <img
-                src="https://gramentheme.com/html/fresheat/assets/img/shape/aboutShape1_3.png"
-                alt="Variety 1"
-                className="w-full rounded-lg animate-spin-slow"
-              />
+         <section className="py-16 px-6 md:px-20 bg-gray-50">
+  <div className="grid md:grid-cols-3 items-center gap-10 max-w-6xl mx-auto">
 
-              <div className="text-center">
-                <h2 className="text-3xl font-bold">
-                  Variety Of Flavours From American Cuisine
-                </h2>
-                <p className="mt-4">
-                  We deliver the best taste and authentic flavors right to your
-                  doorstep.
-                </p>
-              </div>
+    {/* Left Image */}
+    <motion.img
+      src="https://gramentheme.com/html/fresheat/assets/img/shape/aboutShape1_3.png"
+      alt="Variety 1"
+      className="w-full rounded-lg"
 
-              <img
-                src="https://gramentheme.com/html/fresheat/assets/img/shape/aboutShape1_6.png"
-                alt="Variety 2"
-                className="w-full rounded-lg animate-spin-slow"
-              />
-            </div>
-          </section>
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
 
-          {/* Best Selling Dishes */}
-         <section className="py-16 px-6 md:px-20 bg-[#f9f9f9]">
-  <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-    Best Selling Dishes
-  </h2>
+      animate={{ rotate: [0, 5, -5, 0], y: [0, -10, 0] }}
+      transition={{
+        rotate: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+        y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
+      }}
 
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-    {bestSellingDishes.map((dish, i) => (
-      <div
-        key={i}
-        className="group p-5 rounded-2xl shadow-md hover:shadow-xl transition duration-300 cursor-pointer bg-white"
-      >
-        <div className="flex justify-center mb-4">
-          <img
-            src={dish.img}
-            alt={dish.name}
-            className="
-              w-28 h-28 rounded-full object-cover
-              transition-transform duration-300
-              group-hover:-translate-y-2
-            "
-          />
-        </div>
+      whileHover={{ scale: 1.1, rotate: 10 }}
+    />
 
-        <h4 className="text-center font-semibold text-lg text-gray-800">
-          {dish.name}
-        </h4>
-        <p className="text-center text-red-500 font-medium mt-1">
-          {dish.price}
-        </p>
-      </div>
-    ))}
+    {/* Center Text */}
+    <motion.div
+      className="text-center"
+
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-3xl font-bold">
+        Variety Of Flavours From American Cuisine
+      </h2>
+      <p className="mt-4">
+        We deliver the best taste and authentic flavors right to your
+        doorstep.
+      </p>
+    </motion.div>
+
+    {/* Right Image */}
+    <motion.img
+      src="https://gramentheme.com/html/fresheat/assets/img/shape/aboutShape1_6.png"
+      alt="Variety 2"
+      className="w-full rounded-lg"
+
+      initial={{ opacity: 0, x: 100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+
+      animate={{ rotate: [0, -5, 5, 0], y: [0, -10, 0] }}
+      transition={{
+        rotate: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+        y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
+      }}
+
+      whileHover={{ scale: 1.1, rotate: -10 }}
+    />
+
   </div>
 </section>
 
 
+          {/* ============================== */}
+<section className="py-20 px-6 bg-white overflow-hidden">
+  
+  {/* Header */}
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="text-center mb-12"
+  >
+    <h2 className="text-5xl font-extrabold tracking-wide text-black mb-4">
+      Check Our{" "}
+      <span className="text-red-500">
+        Yummy Menu
+      </span>
+    </h2>
+  </motion.div>
+
+  {/* Tabs */}
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+    viewport={{ once: true }}
+    className="flex justify-center gap-8 mb-10 text-gray-600"
+  >
+    {Object.keys(menuData).map((tab) => (
+      <button
+        key={tab}
+        onClick={() => setActiveTab(tab)}
+        className={`pb-2 transition-all duration-300 ${
+          activeTab === tab
+            ? "text-red-500 border-b-2 border-red-500 scale-110"
+            : "hover:text-red-500 hover:scale-105"
+        }`}
+      >
+        {tab}
+      </button>
+    ))}
+  </motion.div>
+
+  {/* Sub heading */}
+  <motion.div
+    key={activeTab}
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.4 }}
+    className="text-center mb-14"
+  >
+    <h3 className="text-3xl text-red-500 tracking-wide">
+      {activeTab}
+    </h3>
+  </motion.div>
+
+  {/* Menu Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-24 gap-x-10 max-w-6xl mx-auto">
+    {menuData[activeTab].map((item, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.15 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -10 }}
+        className="text-center relative"
+      >
+        <div className="relative flex justify-center group">
+          <motion.div 
+            className="w-52 h-52 rounded-full bg-gray-100 shadow-inner"
+            animate={{ rotate: [0, 2, -2, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+
+          <motion.img
+            src={item.img}
+            alt={item.name}
+            onClick={() => openPopup(index)}
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="absolute top-1/2 -translate-y-1/2 w-44 h-44 rounded-full object-cover cursor-pointer shadow-lg"
+          />
+        </div>
+
+        <h4 className="mt-8 text-lg font-semibold">
+          {item.name}
+        </h4>
+        <p className="text-sm text-gray-400 mt-1">
+          {item.desc}
+        </p>
+        <p className="mt-2 text-red-500 font-semibold text-lg">
+          {item.price}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+
+  {/* POPUP */}
+  {isOpen && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+    >
+      <button
+        onClick={closePopup}
+        className="absolute top-6 right-6 text-white text-3xl hover:scale-125 transition"
+      >
+        ✕
+      </button>
+
+      <button
+        onClick={prevImage}
+        className="absolute left-6 text-white text-4xl p-3 bg-white/10 rounded-full hover:scale-125 transition"
+      >
+        ‹
+      </button>
+
+      <motion.img
+        key={currentIndex}
+        src={menuData[activeTab][currentIndex].img}
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-[420px] h-[420px] rounded-full object-cover shadow-[0_0_80px_rgba(255,255,255,0.15)]"
+      />
+
+      <button
+        onClick={nextImage}
+        className="absolute right-6 text-white text-4xl p-3 bg-white/10 rounded-full hover:scale-125 transition"
+      >
+        ›
+      </button>
+    </motion.div>
+  )}
+</section>
+          {/* Best Selling Dishes */}
+<section className="py-16 px-6 md:px-20 bg-[#f9f9f9] overflow-hidden">
+  
+  {/* Heading */}
+  <motion.h2
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7 }}
+    viewport={{ once: true }}
+    className="text-3xl font-bold text-center mb-12 text-gray-800"
+  >
+    Best Selling Dishes
+  </motion.h2>
+
+  {/* Grid */}
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+    {bestSellingDishes.map((dish, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 80, scale: 0.9 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: i * 0.15 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -12, scale: 1.05 }}
+        className="group p-5 rounded-2xl shadow-md hover:shadow-2xl 
+        transition-all duration-500 cursor-pointer bg-white"
+      >
+        <div className="flex justify-center mb-4 relative">
+          
+          {/* Image Animation */}
+          <motion.img
+            src={dish.img}
+            alt={dish.name}
+            whileHover={{ rotate: 6, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="w-28 h-28 rounded-full object-cover"
+          />
+
+          {/* Glow Effect */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            className="absolute w-28 h-28 rounded-full bg-red-400/20 blur-xl"
+          />
+        </div>
+
+        <h4 className="text-center font-semibold text-lg text-gray-800 group-hover:text-red-500 transition">
+          {dish.name}
+        </h4>
+
+        <p className="text-center text-red-500 font-medium mt-1">
+          {dish.price}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
           {/* Discount Offer */}
-          <section className="relative bg-gradient-to-r from-black via-gray-900 to-black text-white py-24 text-center overflow-hidden">
-            <div className="max-w-5xl mx-auto px-6 relative z-10">
-              <h2 className="text-5xl font-extrabold tracking-wide text-red-500 mb-4">
-                TODAY'S SPECIAL Offer
-              </h2>
-              <p className="text-xl text-gray-300 mb-10">
-                🔥 Grab your deal before time runs out!
-              </p>
+<section className="relative bg-gradient-to-r from-black via-gray-900 to-black text-white py-24 text-center overflow-hidden">
 
-              {/* Countdown Timer */}
-              <div className="flex justify-center gap-8 mb-12">
-                {[
-                  { label: "Hours", value: timeLeft.hours },
-                  { label: "Minutes", value: timeLeft.minutes },
-                  { label: "Seconds", value: timeLeft.seconds },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 w-24 shadow-lg"
-                  >
-                    <div className="text-3xl font-bold text-yellow-400">
-                      {String(item.value).padStart(2, "0")}
-                    </div>
-                    <div className="text-sm text-gray-300 mt-2">
-                      {item.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+  <motion.div
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="max-w-5xl mx-auto px-6 relative z-10"
+  >
+    
+    <motion.h2
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      className="text-5xl font-extrabold tracking-wide text-red-500 mb-4"
+    >
+      TODAY'S SPECIAL Offer
+    </motion.h2>
 
-               <button className="bg-white text-black hover:bg-red-600 hover:text-white font-semibold px-10 py-3 rounded-full transition transform hover:scale-105">
-  Order Now
-</button>
+    <motion.p
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
+      className="text-xl text-gray-300 mb-10"
+    >
+      🔥 Grab your deal before time runs out!
+    </motion.p>
 
-            </div>
+    {/* Countdown */}
+    <div className="flex justify-center gap-8 mb-12">
+      {[
+        { label: "Hours", value: timeLeft.hours },
+        { label: "Minutes", value: timeLeft.minutes },
+        { label: "Seconds", value: timeLeft.seconds },
+      ].map((item, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.2 }}
+          whileHover={{ scale: 1.1 }}
+          viewport={{ once: true }}
+          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 w-24 shadow-lg"
+        >
+          <div className="text-3xl font-bold text-yellow-400">
+            {String(item.value).padStart(2, "0")}
+          </div>
+          <div className="text-sm text-gray-300 mt-2">
+            {item.label}
+          </div>
+        </motion.div>
+      ))}
+    </div>
 
-            {/* Decorative Glow */}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-red-500/10 via-black/50 to-black/90 opacity-20 z-0" />
-          </section>
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="bg-white text-black font-semibold px-10 py-3 rounded-full 
+      transition-all duration-500 hover:bg-red-600 hover:text-white"
+    >
+      Order Now
+    </motion.button>
 
+  </motion.div>
+
+  {/* Glow Background Animation */}
+  <motion.div
+    animate={{ scale: [1, 1.2, 1] }}
+    transition={{ duration: 6, repeat: Infinity }}
+    className="absolute -top-20 -left-20 w-96 h-96 bg-red-600 rounded-full blur-[150px] opacity-20"
+  />
+  <motion.div
+    animate={{ scale: [1, 1.3, 1] }}
+    transition={{ duration: 7, repeat: Infinity }}
+    className="absolute -bottom-20 -right-20 w-96 h-96 bg-yellow-500 rounded-full blur-[150px] opacity-20"
+  />
+
+</section>
           {/* Fresheat Menu */}
-          <section className="py-20 px-6 bg-white">
-            {/* Header */}
-            <div className="text-center mb-12">
-              <p className="text-sm tracking-widest text-gray-400 uppercase"></p>
-              <h2 className="text-5xl font-extrabold tracking-wide text-black mb-4">
-                Check Our{" "}
-                <span className="text-5xl font-extrabold tracking-wide text-red-500 mb-4">
-                  Yummy Menu
-                </span>
-              </h2>
-            </div>
-
-            {/* Tabs */}
-            <div className="flex justify-center gap-8 mb-10 text-gray-600">
-              {Object.keys(menuData).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`pb-2 transition ${
-                    activeTab === tab
-                      ? "text-red-500 border-b-2 border-red-500"
-                      : "hover:text-red-500"
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-
-            {/* Sub heading */}
-            <div className="text-center mb-14">
-              <p className="text-sm text-gray-400 uppercase"></p>
-              <h3 className="text-3xl text-red-500 tracking-wide">
-                {activeTab}
-              </h3>
-            </div>
-
-            {/* Menu Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-24 gap-x-10 max-w-6xl mx-auto">
-              {menuData[activeTab].map((item, index) => (
-                <div key={index} className="text-center relative">
-                  <div className="relative flex justify-center">
-                    <div className="w-52 h-52 rounded-full bg-gray-100 shadow-inner"></div>
-
-                    <img
-                      src={item.img}
-                      alt={item.name}
-                      onClick={() => openPopup(index)}
-                      className="absolute top-1/2 -translate-y-1/2 w-44 h-44 rounded-full object-cover cursor-pointer hover:scale-110 transition shadow-lg"
-                    />
-                  </div>
-
-                  <h4 className="mt-8 text-lg font-semibold">{item.name}</h4>
-                  <p className="text-sm text-gray-400 mt-1">{item.desc}</p>
-                  <p className="mt-2 text-red-500 font-semibold text-lg">
-                    {item.price}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* POPUP */}
-            {isOpen && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
-                <button
-                  onClick={closePopup}
-                  className="absolute top-6 right-6 text-white text-3xl"
-                >
-                  ✕
-                </button>
-
-                <button
-                  onClick={prevImage}
-                  className="absolute left-6 text-white text-4xl p-3 bg-white/10 rounded-full"
-                >
-                  ‹
-                </button>
-
-                <img
-                  src={menuData[activeTab][currentIndex].img}
-                  alt=""
-                  className="w-[420px] h-[420px] rounded-full object-cover shadow-[0_0_80px_rgba(255,255,255,0.15)]"
-                />
-
-                <button
-                  onClick={nextImage}
-                  className="absolute right-6 text-white text-4xl p-3 bg-white/10 rounded-full"
-                >
-                  ›
-                </button>
-              </div>
-            )}
-          </section>
+       
 
           {/* Meet Our Expert Chefs */}
           {/* <section className="bg-[#f6f3ed] py-16 px-6">
@@ -901,50 +1185,68 @@ Her burgers are juicy, her pizzas are cheesy, and every dish is made using fresh
 </section> */}
 
           {/* Testimonials */}
-         <section className="bg-white py-12 md:py-16 px-4 md:px-6 overflow-hidden">
-  {/* Heading */}
-  <h2 className="text-3xl sm:text-4xl md:text-5xl text-center font-extrabold tracking-wide text-black mb-8 md:mb-10">
-    Let's meet{" "}
-    <span className="text-red-500">the expert.</span>
-  </h2>
+<section className="bg-white py-12 md:py-16 px-4 md:px-6 overflow-hidden">
+
+  <motion.h2
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7 }}
+    viewport={{ once: true }}
+    className="text-3xl sm:text-4xl md:text-5xl text-center font-extrabold tracking-wide text-black mb-8 md:mb-10"
+  >
+    Let's meet <span className="text-red-500">the expert.</span>
+  </motion.h2>
 
   <div className="max-w-6xl mx-auto border border-[#faeccc] rounded-2xl p-5 sm:p-8 md:p-10 bg-[#f6f3ed]">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 
-      {/* LEFT IMAGES */}
-      <div className="relative flex justify-center gap-4 sm:gap-6">
-        <img
+      {/* Images */}
+      <motion.div
+        initial={{ opacity: 0, x: -80 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="relative flex justify-center gap-4 sm:gap-6"
+      >
+        <motion.img
           src={item.img1}
-          alt=""
-          className="w-36 sm:w-44 md:w-56 h-56 sm:h-64 md:h-80 object-cover rounded-xl shadow-lg transition-all duration-700"
+          whileHover={{ scale: 1.05 }}
+          className="w-36 sm:w-44 md:w-56 h-56 sm:h-64 md:h-80 object-cover rounded-xl shadow-lg"
         />
-        <img
+        <motion.img
           src={item.img2}
-          alt=""
-          className="w-36 sm:w-44 md:w-56 h-56 sm:h-64 md:h-80 object-cover rounded-xl shadow-lg mt-6 sm:mt-8 md:mt-10 transition-all duration-700"
+          whileHover={{ scale: 1.05 }}
+          className="w-36 sm:w-44 md:w-56 h-56 sm:h-64 md:h-80 object-cover rounded-xl shadow-lg mt-6 sm:mt-8 md:mt-10"
         />
-      </div>
+      </motion.div>
 
-      {/* RIGHT CONTENT */}
-      <div className="text-center md:text-left">
-        <div className="text-4xl sm:text-5xl md:text-6xl text-gray-300 leading-none mb-3 md:mb-4">
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, x: 80 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center md:text-left"
+      >
+        <div className="text-6xl text-gray-300 leading-none mb-4">
           “
         </div>
 
-        <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 transition-opacity duration-700">
+        <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
           {item.text}
         </p>
 
-        <div className="border-t border-gray-300 w-12 md:w-16 mx-auto md:mx-0 mb-4"></div>
+        <div className="border-t border-gray-300 w-16 mx-auto md:mx-0 mb-4"></div>
 
-        <h4 className="text-base sm:text-lg font-semibold text-gray-800">
+        <h4 className="text-lg font-semibold text-gray-800">
           {item.name}
         </h4>
         <span className="text-sm text-gray-500">{item.role}</span>
-      </div>
+      </motion.div>
 
     </div>
   </div>
+
 </section>
 
 
