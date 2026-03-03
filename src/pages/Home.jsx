@@ -554,7 +554,7 @@ const zoomIn = {
           viewport={{ once: true }}
         >
           <motion.img
-            src="https://i.pinimg.com/736x/75/65/0f/75650fcfde55a163fc1107525bf7c47a.jpg"
+            src="\src\assets\images\burger img.png"
             alt="Burger"
             className="w-96 mx-auto mt-10 md:mt-0 select-none"
 
