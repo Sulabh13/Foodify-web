@@ -864,7 +864,7 @@ const zoomIn = {
 
           {/* ============================== */}
 <section className="py-20 px-6 bg-white overflow-hidden">
-  
+
   {/* Header */}
   <motion.div
     initial={{ opacity: 0, y: 60 }}
@@ -930,19 +930,32 @@ const zoomIn = {
         className="text-center relative"
       >
         <div className="relative flex justify-center group">
-          <motion.div 
+          <motion.div
             className="w-52 h-52 rounded-full bg-gray-100 shadow-inner"
             animate={{ rotate: [0, 2, -2, 0] }}
             transition={{ duration: 6, repeat: Infinity }}
           />
 
-          <motion.img
+          {/* ✅ FIXED: whileHover removed, CSS handles hover smoothly */}
+          <img
             src={item.img}
             alt={item.name}
             onClick={() => openPopup(index)}
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className="absolute top-1/2 -translate-y-1/2 w-44 h-44 rounded-full object-cover cursor-pointer shadow-lg"
+            className="absolute top-1/2 left-1/2 w-44 h-44 rounded-full object-cover cursor-pointer shadow-lg food-hover-img"
+            style={{
+              transform: "translate(-50%, -50%) scale(1) rotate(0deg)",
+              transition: "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease",
+              border: "3px solid #fff",
+              willChange: "transform",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1.12) rotate(5deg)";
+              e.currentTarget.style.boxShadow = "0 20px 60px rgba(231,76,60,0.25)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1) rotate(0deg)";
+              e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.18)";
+            }}
           />
         </div>
 
@@ -1183,6 +1196,67 @@ const zoomIn = {
     </div>
   </div>
 </section> */}
+
+{/* mar quue  */}
+
+{/* ── Marquee Section ── */}
+<div
+  style={{
+    background: "#f0ede8",
+    overflow: "hidden",
+    padding: "28px 0",
+    whiteSpace: "nowrap",
+    marginTop :"80px",
+  }}
+>
+  <style>{`
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee-scroll 18s linear infinite;
+      will-change: transform;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-item {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #c5bfb8;
+      padding: 0 32px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+    .marquee-dot {
+      color: #e8622a;
+      font-size: 28px;
+      padding: 0 8px;
+    }
+  `}</style>
+
+  <div className="marquee-track">
+    {[
+      " COOKISE", "•", "BURGER", "•", "SANDWICH", "•",
+      "FRESH SALAD", "•", "PASTA", "•", "NOODLES", "•", "TACOS", "•",
+      "PANNER", "•", "BURGER", "•", "PIZZA", "•",
+      "FRESH SALAD", "•", "PASTA", "•", "NOODLES", "•", "TACOS", "•",
+    ].map((text, i) =>
+      text === "•" ? (
+        <span key={i} className="marquee-item marquee-dot">●</span>
+      ) : (
+        <span key={i} className="marquee-item">{text}</span>
+      )
+    )}
+  </div>
+</div>
+{/* ── Marquee Section End ── */}
+
+
 
           {/* Testimonials */}
 <section className="bg-white py-12 md:py-16 px-4 md:px-6 overflow-hidden">

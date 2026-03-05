@@ -192,7 +192,7 @@ function Gallery() {
           className="relative max-w-6xl mx-auto mt-12 sm:mt-16 rounded-2xl overflow-hidden shadow-xl"
         >
           <motion.img
-            src="https://media.istockphoto.com/id/1488738060/photo/south-indian-veg-thali.jpg?s=612x612&w=0&k=20&c=mzaQufFbfOusluGwQ6Iqx0j-hXg9_fMXGekMSMDnFdY="
+            src="https://fast-food.bold-themes.com/main-demo/wp-content/uploads/sites/2/2017/01/background-burgers-home-top.jpg"
             alt="Chefs cooking"
             className="w-full h-[250px] sm:h-[380px] md:h-[480px] object-cover"
             initial={{ scale: 1.1 }}
